@@ -56,3 +56,20 @@ function render(snapshot: Snapshot): void {
 }
 
 window.sysWidget.onMetrics(render);
+
+const pauseBtn = document.getElementById("pause-btn") as HTMLButtonElement | null;
+const closeBtn = document.getElementById("close-btn") as HTMLButtonElement | null;
+
+function setPauseLabel(paused: boolean): void {
+  if (pauseBtn) pauseBtn.textContent = paused ? "▶ Reprendre" : "⏸ Pause";
+}
+
+pauseBtn?.addEventListener("click", () => {
+  void window.sysWidget.togglePause();
+});
+
+closeBtn?.addEventListener("click", () => {
+  window.sysWidget.closeApp();
+});
+
+window.sysWidget.onPauseState(setPauseLabel);

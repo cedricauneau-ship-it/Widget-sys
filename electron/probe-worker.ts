@@ -1,8 +1,16 @@
 import { takeSnapshot } from "./metrics.js";
 
 const POLL_MS = 2000;
+let isPaused = false;
+
+process.parentPort.on("message", (e) => {
+  const command = e.data as { type: "pause" | "resume" };
+  if (command.type === "pause") isPaused = true;
+  if (command.type === "resume") isPaused = false;
+});
 
 async function loop(): Promise<void> {
+  if (isPaused) return;
   try {
     const snapshot = await takeSnapshot();
     process.parentPort.postMessage(snapshot);
@@ -13,4 +21,4 @@ async function loop(): Promise<void> {
 }
 
 setInterval(loop, POLL_MS);
-loop(); // premier appel immédiat, sans attendre le premier tick
+loop();

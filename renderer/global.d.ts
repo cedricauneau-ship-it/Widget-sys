@@ -7,6 +7,9 @@ declare global {
     sysWidget: {
       platform: string;
       onMetrics: (callback: (snapshot: Snapshot) => void) => void;
+      togglePause: () => Promise<boolean>;
+      closeApp: () => void;
+      onPauseState: (callback: (paused: boolean) => void) => void;
     };
   }
 }

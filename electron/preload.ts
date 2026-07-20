@@ -8,4 +8,13 @@ contextBridge.exposeInMainWorld("sysWidget", {
       callback(snapshot);
     });
   },
+  togglePause: (): Promise<boolean> => ipcRenderer.invoke("app:toggle-pause"),
+  closeApp: (): void => {
+    ipcRenderer.send("app:close");
+  },
+  onPauseState: (callback: (paused: boolean) => void) => {
+    ipcRenderer.on("app:pause-state", (_event, paused: boolean) => {
+      callback(paused);
+    });
+  },
 });

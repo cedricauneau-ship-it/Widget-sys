@@ -23,6 +23,24 @@
     }
     canvas { display: block; margin: 0 auto; }
     #net { text-align: center; margin-top: 8px; font-size: 13px; color: #a1a1aa; -webkit-app-region: no-drag; }
+    .controls {
+      display: flex;
+      justify-content: flex-end;
+      gap: 6px;
+      margin-top: 10px;
+      -webkit-app-region: no-drag;
+    }
+    .btn {
+      background: #26262b;
+      color: #e4e4e7;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn:hover { background: #34343b; }
+    .btn-close:hover { background: #e5484d; }
   </style>
 </head>
 <body>
@@ -36,6 +54,10 @@
     </div>
     <div id="net">-- Mb/s</div>
     <script type="module" src="app.js"></script>
+    <div class="controls">
+      <button id="pause-btn" class="btn">⏸ Pause</button>
+      <button id="close-btn" class="btn btn-close">✕</button>
+    </div>
   </div>
 </body>
 </html>
