@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Performances</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+    .panel {
+      background: rgba(17, 17, 20, 0.85);
+      border-radius: 12px;
+      padding: 16px;
+      -webkit-app-region: drag;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      -webkit-app-region: no-drag;
+    }
+    canvas { display: block; margin: 0 auto; }
+    #net { text-align: center; margin-top: 8px; font-size: 13px; color: #a1a1aa; -webkit-app-region: no-drag; }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <div class="grid">
+      <canvas id="cpu-gauge" width="120" height="120"></canvas>
+      <canvas id="ram-gauge" width="120" height="120"></canvas>
+      <canvas id="disk-gauge" width="120" height="120"></canvas>
+      <canvas id="gpu0-gauge" width="120" height="120"></canvas>
+      <canvas id="gpu1-gauge" width="120" height="120"></canvas>
+    </div>
+    <div id="net">-- Mb/s</div>
+    <script type="module" src="app.js"></script>
+  </div>
+</body>
+</html>

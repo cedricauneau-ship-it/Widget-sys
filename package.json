@@ -1,16 +1,22 @@
 {
   "name": "syswidget",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist-electron/main.js",
   "license": "MIT",
   "dependencies": {
     "systeminformation": "^5.32.0"
   },
   "devDependencies": {
     "@types/node": "^26.1.1",
+    "electron": "^43.1.1",
     "tsx": "^4.23.1",
     "typescript": "^7.0.2"
   },
   "type": "module",
-  "scripts": { "probe": "tsx src/probe.ts" }
+  "scripts": {
+    "probe": "tsx src/probe.ts",
+    "build:electron": "tsc -p tsconfig.electron.json && node -e \"require('fs').copyFileSync('electron/package.json','dist-electron/package.json')\"",
+    "build:renderer": "tsc -p tsconfig.renderer.json",
+    "dev:electron": "yarn build:electron && yarn build:renderer && electron ."
+  }
 }
