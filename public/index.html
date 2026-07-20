@@ -10,20 +10,39 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="panel">
+  <div class="frame">
+    <span class="corner tl"></span>
+    <span class="corner tr"></span>
+    <span class="corner bl"></span>
+    <span class="corner br"></span>
+    <header class="nameplate">
+      <span class="nameplate-title">SYSWIDGET</span>
+      <span class="status">
+        <span class="led" id="led"></span>
+        <span id="status-text">LIVE</span>
+      </span>
+    </header>
     <div class="grid">
-      <canvas id="cpu-gauge" width="120" height="120"></canvas>
-      <canvas id="ram-gauge" width="120" height="120"></canvas>
-      <canvas id="disk-gauge" width="120" height="120"></canvas>
-      <canvas id="gpu0-gauge" width="120" height="120"></canvas>
-      <canvas id="gpu1-gauge" width="120" height="120"></canvas>
+      <canvas id="cpu-gauge" width="120" height="142"></canvas>
+      <canvas id="ram-gauge" width="120" height="142"></canvas>
+      <canvas id="disk-gauge" width="120" height="142"></canvas>
+      <canvas id="gpu0-gauge" width="120" height="142"></canvas>
+      <canvas id="gpu1-gauge" width="120" height="142"></canvas>
     </div>
-    <div id="net">-- Mb/s</div>
-    <script type="module" src="app.js"></script>
+    <div class="net-panel">
+      <div class="net-title">RÉSEAU</div>
+
+      <div class="net-label in">↓ ENTRANT <span id="net-rx">0.0</span> Mb/s</div>
+      <canvas id="net-graph-in" width="376" height="30"></canvas>
+
+      <div class="net-label out">↑ SORTANT <span id="net-tx">0.0</span> Mb/s</div>
+      <canvas id="net-graph-out" width="376" height="30"></canvas>
+    </div>
     <div class="controls">
-      <button id="pause-btn" class="btn">⏸ Pause</button>
-      <button id="close-btn" class="btn btn-close">✕</button>
+      <button id="pause-btn" class="btn">PAUSE</button>
+      <button id="close-btn" class="btn btn-close">CLOSE</button>
     </div>
   </div>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

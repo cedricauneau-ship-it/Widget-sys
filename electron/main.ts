@@ -19,12 +19,13 @@ function createWindow(): void {
   const saved = loadPosition();
 
   const win = new BrowserWindow({
-    width: 420,
-    height: 360,
+    width: 440,
+    height: 300,
     x: saved?.x,
     y: saved?.y,
     frame: false,
     transparent: false,
+    backgroundColor: "#14201b",
     alwaysOnTop: true,
     resizable: false,
     skipTaskbar: true,
@@ -47,8 +48,6 @@ function createWindow(): void {
 
   win.loadFile(path.join(__dirname, "../public/index.html"));
 
-  // win.webContents.openDevTools({ mode: "detach" });
-
   const probe = utilityProcess.fork(path.join(__dirname, "probe-worker.js"));
 
   probe.on("message", (snapshot: Snapshot) => {
@@ -57,6 +56,25 @@ function createWindow(): void {
 
   win.on("closed", () => {
     probe.kill();
+  });
+
+  let isPolling = false;
+  const pollAndSend = (): void => {
+    if (isPolling) return;
+    isPolling = true;
+    // Le sondage réel est délégué au worker ; ce flag protège juste contre un futur appel direct.
+    isPolling = false;
+  };
+
+  win.webContents.once("did-finish-load", () => {
+    win.webContents
+      .executeJavaScript("document.querySelector('.frame').getBoundingClientRect().height")
+      .then((frameHeight: number) => {
+        win.setContentSize(440, Math.ceil(frameHeight));
+      })
+      .catch((err: unknown) => {
+        console.error("Mesure du contenu échouée :", err);
+      });
   });
 
   setupControls(win, probe);
