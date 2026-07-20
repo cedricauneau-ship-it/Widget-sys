@@ -47,6 +47,8 @@ function createWindow(): void {
 
   win.loadFile(path.join(__dirname, "../public/index.html"));
 
+  // win.webContents.openDevTools({ mode: "detach" });
+
   const probe = utilityProcess.fork(path.join(__dirname, "probe-worker.js"));
 
   probe.on("message", (snapshot: Snapshot) => {

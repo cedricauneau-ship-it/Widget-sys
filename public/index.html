@@ -2,46 +2,12 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Performances</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: transparent;
-    }
-    .panel {
-      background: rgba(17, 17, 20, 0.85);
-      border-radius: 12px;
-      padding: 16px;
-      -webkit-app-region: drag;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      -webkit-app-region: no-drag;
-    }
-    canvas { display: block; margin: 0 auto; }
-    #net { text-align: center; margin-top: 8px; font-size: 13px; color: #a1a1aa; -webkit-app-region: no-drag; }
-    .controls {
-      display: flex;
-      justify-content: flex-end;
-      gap: 6px;
-      margin-top: 10px;
-      -webkit-app-region: no-drag;
-    }
-    .btn {
-      background: #26262b;
-      color: #e4e4e7;
-      border: none;
-      border-radius: 6px;
-      padding: 6px 10px;
-      font-size: 12px;
-      cursor: pointer;
-    }
-    .btn:hover { background: #34343b; }
-    .btn-close:hover { background: #e5484d; }
-  </style>
+  <meta
+    http-equiv="Content-Security-Policy"
+    content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; base-uri 'none';"
+  />
+  <title>SysWidget</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="panel">
