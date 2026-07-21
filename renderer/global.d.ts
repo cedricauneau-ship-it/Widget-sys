@@ -10,6 +10,9 @@ declare global {
       togglePause: () => Promise<boolean>;
       closeApp: () => void;
       onPauseState: (callback: (paused: boolean) => void) => void;
+      minimizeWindow: () => void;
+      toggleMaximizeWindow: () => void;
+      onMaximizeState: (callback: (maximized: boolean) => void) => void;
     };
   }
 }

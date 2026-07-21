@@ -15,32 +15,44 @@
     <span class="corner tr"></span>
     <span class="corner bl"></span>
     <span class="corner br"></span>
+
     <header class="nameplate">
       <span class="nameplate-title">SYSWIDGET</span>
-      <span class="status">
-        <span class="led" id="led"></span>
-        <span id="status-text">LIVE</span>
-      </span>
+      <div class="nameplate-right">
+        <span class="status">
+          <button id="pause-btn" class="pause-toggle" aria-label="Mettre en pause">⏸</button>
+          <span class="led" id="led"></span>
+          <span id="status-text">LIVE</span>
+        </span>
+        <div class="win-controls">
+          <button id="min-btn" class="win-btn" aria-label="Réduire">–</button>
+          <button id="max-btn" class="win-btn" aria-label="Agrandir">▢</button>
+          <button id="winclose-btn" class="win-btn win-btn-close" aria-label="Fermer">×</button>
+        </div>
+      </div>
     </header>
-    <div class="grid">
+
+    <div class="grid-2">
       <canvas id="cpu-gauge" width="120" height="142"></canvas>
       <canvas id="ram-gauge" width="120" height="142"></canvas>
-      <canvas id="disk-gauge" width="120" height="142"></canvas>
-      <canvas id="gpu0-gauge" width="120" height="142"></canvas>
-      <canvas id="gpu1-gauge" width="120" height="142"></canvas>
     </div>
-    <div class="net-panel">
-      <div class="net-title">RÉSEAU</div>
 
+    <div class="section">
+      <div class="section-title">DISQUE(S)</div>
+      <div class="dyn-grid" id="disk-grid"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">GPU</div>
+      <div class="dyn-grid" id="gpu-grid"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">RÉSEAU</div>
       <div class="net-label in">↓ ENTRANT <span id="net-rx">0.0</span> Mb/s</div>
-      <canvas id="net-graph-in" width="376" height="30"></canvas>
-
+      <canvas id="net-graph-in" height="30"></canvas>
       <div class="net-label out">↑ SORTANT <span id="net-tx">0.0</span> Mb/s</div>
-      <canvas id="net-graph-out" width="376" height="30"></canvas>
-    </div>
-    <div class="controls">
-      <button id="pause-btn" class="btn">PAUSE</button>
-      <button id="close-btn" class="btn btn-close">CLOSE</button>
+      <canvas id="net-graph-out" height="30"></canvas>
     </div>
   </div>
   <script type="module" src="app.js"></script>

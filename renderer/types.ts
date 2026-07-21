@@ -4,11 +4,17 @@ export type GpuStat = {
   memUsedMb: number | null;
 };
 
+export type DiskStat = {
+  mount: string;
+  label: string;
+  usedPct: number;
+};
+
 export type Snapshot = {
   cpuPct: number;
   memUsedGb: number;
   memTotalGb: number;
-  diskUsedPct: number;
+  disks: DiskStat[];
   netRxMbps: number;
   netTxMbps: number;
   gpus: GpuStat[];

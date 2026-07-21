@@ -2,19 +2,19 @@ import fs from "node:fs";
 import path from "node:path";
 import { app } from "electron";
 
-type WindowPosition = { x: number; y: number };
+export type WindowBounds = { x: number; y: number; width: number; height: number };
 
-const storePath = path.join(app.getPath("userData"), "window-position.json");
+const storePath = path.join(app.getPath("userData"), "window-bounds.json");
 
-export function loadPosition(): WindowPosition | null {
+export function loadBounds(): Partial<WindowBounds> | null {
   try {
     const raw = fs.readFileSync(storePath, "utf-8");
-    return JSON.parse(raw) as WindowPosition;
+    return JSON.parse(raw) as Partial<WindowBounds>;
   } catch {
-    return null; // premier lancement : le fichier n'existe pas encore
+    return null;
   }
 }
 
-export function savePosition(position: WindowPosition): void {
-  fs.writeFileSync(storePath, JSON.stringify(position));
+export function saveBounds(bounds: WindowBounds): void {
+  fs.writeFileSync(storePath, JSON.stringify(bounds));
 }

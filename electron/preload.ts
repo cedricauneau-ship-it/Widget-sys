@@ -17,4 +17,15 @@ contextBridge.exposeInMainWorld("sysWidget", {
       callback(paused);
     });
   },
+  minimizeWindow: (): void => {
+    ipcRenderer.send("window:minimize");
+  },
+  toggleMaximizeWindow: (): void => {
+    ipcRenderer.send("window:toggle-maximize");
+  },
+  onMaximizeState: (callback: (maximized: boolean) => void) => {
+    ipcRenderer.on("window:maximize-state", (_event, maximized: boolean) => {
+      callback(maximized);
+    });
+  },
 });
