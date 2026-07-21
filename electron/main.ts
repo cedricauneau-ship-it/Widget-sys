@@ -1,10 +1,30 @@
 import { app, BrowserWindow, Menu, Tray, nativeImage, utilityProcess, ipcMain } from "electron";
+import { autoUpdater } from "electron-updater";
 import path from "node:path";
 import { loadBounds, saveBounds } from "./store.js";
 import { loadSettings, saveSettings, type Settings } from "./settings-store.js";
 import { listNetOptions, pickDefaultNetIface } from "./hardware-options.js";
 import { TRAY_ICON_BASE64 } from "./tray-icon.js";
 import type { Snapshot } from "./metrics.js";
+
+autoUpdater.on("checking-for-update", () => {
+  console.log("[update] recherche en cours...");
+});
+autoUpdater.on("update-available", (info) => {
+  console.log("[update] disponible :", info.version);
+});
+autoUpdater.on("update-not-available", (info) => {
+  console.log("[update] déjà à jour, version installée :", info.version);
+});
+autoUpdater.on("error", (err) => {
+  console.error("[update] erreur :", err);
+});
+autoUpdater.on("download-progress", (progress) => {
+  console.log(`[update] téléchargement : ${progress.percent.toFixed(1)}%`);
+});
+autoUpdater.on("update-downloaded", (info) => {
+  console.log("[update] téléchargée, prête à installer :", info.version);
+});
 
 function debounce<Args extends unknown[]>(
   fn: (...args: Args) => void,
@@ -171,6 +191,7 @@ async function setupControls(win: BrowserWindow, probe: Electron.UtilityProcess)
 app.whenReady().then(() => {
   Menu.setApplicationMenu(null);
   createWindow();
+  autoUpdater.checkForUpdatesAndNotify();
 });
 
 app.on("window-all-closed", () => {

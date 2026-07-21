@@ -6,6 +6,7 @@
   "main": "dist-electron/main.js",
   "license": "MIT",
   "dependencies": {
+    "electron-updater": "^6.8.9",
     "systeminformation": "^5.32.0"
   },
   "devDependencies": {
