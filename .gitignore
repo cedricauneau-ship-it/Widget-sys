@@ -3,3 +3,4 @@ dist/
 .env
 dist-electron/
 public/*.js
+release/
