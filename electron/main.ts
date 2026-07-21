@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu, Tray, nativeImage, utilityProcess, ipcMain } from "electron";
+import { app, BrowserWindow, Menu, Tray, nativeImage, utilityProcess, ipcMain, dialog } from "electron";
 import { autoUpdater } from "electron-updater";
 import path from "node:path";
 import { loadBounds, saveBounds } from "./store.js";
@@ -24,6 +24,21 @@ autoUpdater.on("download-progress", (progress) => {
 });
 autoUpdater.on("update-downloaded", (info) => {
   console.log("[update] téléchargée, prête à installer :", info.version);
+  dialog
+    .showMessageBox({
+      type: "info",
+      title: "Mise à jour disponible",
+      message: `SysWidget ${info.version} a été téléchargée.`,
+      detail: "Redémarrez l'application pour l'installer.",
+      buttons: ["Redémarrer maintenant", "Plus tard"],
+      defaultId: 0,
+      cancelId: 1,
+    })
+    .then((result) => {
+      if (result.response === 0) {
+        autoUpdater.quitAndInstall();
+      }
+    });
 });
 
 function debounce<Args extends unknown[]>(
@@ -191,7 +206,7 @@ async function setupControls(win: BrowserWindow, probe: Electron.UtilityProcess)
 app.whenReady().then(() => {
   Menu.setApplicationMenu(null);
   createWindow();
-  autoUpdater.checkForUpdatesAndNotify();
+  autoUpdater.checkForUpdates();
 });
 
 app.on("window-all-closed", () => {
