@@ -1,6 +1,6 @@
 {
   "name": "syswidget",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Application de bureau pour surveiller CPU, RAM, disques, réseau et GPU en temps réel",
   "author": "Cédric Auneau",
   "main": "dist-electron/main.js",
